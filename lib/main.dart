@@ -72,11 +72,13 @@ const keepDuration = Duration(
 );
 
 Future<String> computeValue(String value) async {
+  print('computeValue: Started');
   await Future.delayed(
     const Duration(
       seconds: 5,
     ),
   );
+  print('computeValue: Finished');
   return value;
 }
 
