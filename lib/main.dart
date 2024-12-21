@@ -52,13 +52,13 @@ class MyPage extends ConsumerWidget {
             ),
             FilledButton.tonal(
               onPressed: () async {
-                print('readAndFialedKeepAlive:Button: started');
+                print('readAndFailedKeepAlive:Button: started');
                 final value = await ref.read(
-                  readAndFialedKeepAliveProvider.future,
+                  readAndFailedKeepAliveProvider.future,
                 );
-                print('readAndFialedKeepAlive:Button: finished: $value');
+                print('readAndFailedKeepAlive:Button: finished: $value');
               },
-              child: const Text('Read readAndFialedKeepAlive'),
+              child: const Text('Read readAndFailedKeepAlive'),
             ),
           ],
         ),
@@ -111,23 +111,24 @@ Future<String> readAndKeepAlive(Ref ref) async {
 }
 
 @riverpod
-Future<String> readAndFialedKeepAlive(Ref ref) async {
-  print('readAndFialedKeepAlive:Provider: Started');
+Future<String> readAndFailedKeepAlive(Ref ref) async {
+  print('readAndFailedKeepAlive:Provider: Started');
   ref
     ..onCancel(() {
-      print('readAndFialedKeepAlive:Provider: Canceled');
+      print('readAndFailedKeepAlive:Provider: Canceled');
     })
     ..onResume(() {
-      print('readAndFialedKeepAlive:Provider: Resumed');
+      print('readAndFailedKeepAlive:Provider: Resumed');
     })
     ..onDispose(() {
-      print('readAndFialedKeepAlive:Provider: Disposed');
+      print('readAndFailedKeepAlive:Provider: Disposed');
     });
+
   final result = await computeValue('Read and failed keep alive');
-  print('readAndFialedKeepAlive:Provider: Get result');
+  print('readAndFailedKeepAlive:Provider: Get result');
 
   ref.keepAlive();
 
-  print('readAndFialedKeepAlive:Provider: Finished');
+  print('readAndFailedKeepAlive:Provider: Finished');
   return result;
 }
